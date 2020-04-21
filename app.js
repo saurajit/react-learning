@@ -1,4 +1,10 @@
+const Hello = () => (
+  <h1>Hello World</h1>
+)
+
 ReactDOM.render(
-  React.createElement('h1', null, 'Hello World!!'),
+  <div>
+    <Hello />
+  </div>,
   document.getElementById('root')
 )
