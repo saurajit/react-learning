@@ -20,7 +20,7 @@ const Timer = createReactClass({
     return {
       timestamp: null,
       timerPaused: false,
-      updateInterval: this.props.delay || 1000
+      updateInterval: parseInt(this.props.delay, 10) || 1000
     };
   },
 
@@ -52,15 +52,17 @@ const Timer = createReactClass({
       https://stackoverflow.com/questions/49500255/warning-this-synthetic-event-is-reused-for-performance-reasons-happening-with
     */
     let newValue = event.target.value;
+    let controlName = event.target.name;
 
     if (newValue && !isNaN(newValue)) {
       this.setState(() => ({
-        updateInterval: parseInt(newValue, 10)
-      }));
-      if(!this.state.timerPaused) {
-        clearTimeout(this.t);
-        this.t = setInterval(this.updateTimestamp, this.state.updateInterval);
-      }
+        [controlName]: parseInt(newValue, 10)
+      }), () => {
+        if(!this.state.timerPaused) {
+          clearTimeout(this.t);
+          this.t = setInterval(this.updateTimestamp, this.state.updateInterval);
+        }
+      })
     }
   },
 
@@ -69,7 +71,7 @@ const Timer = createReactClass({
       <div>
         <h3>Timer</h3>
         <div>{this.state.timestamp? new Date(this.state.timestamp).toUTCString() : 'Fetching...'}</div>
-        <div><input type="text" onChange={this.intervalChanged} value={this.state.updateInterval}/></div>
+        <div><input type="text" name="updateInterval" onChange={this.intervalChanged} value={this.state.updateInterval}/></div>
         <div>
           <button onClick={this.pauseTimer} disabled={this.state.timerPaused}>Pause Timer</button>
           <button onClick={this.resumeTimer} disabled={!this.state.timerPaused}>Resume Timer</button>
