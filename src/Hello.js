@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function Hello() {
-    console.log('In here')
-    return (
-        <div>
-            Hello from component
-        </div>
-    )
+class Hello extends Component {
+    greeting = 'inline component';
+    render() {
+        return (
+            <div>
+                Hello from {this.greeting}
+            </div>
+        );
+    }
 }
 
 export default Hello;
