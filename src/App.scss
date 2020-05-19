@@ -1,0 +1,37 @@
+#app-wrapper {
+    height: 100vh;
+    width: 100%;
+
+    display: grid;
+    column-gap: 3px;
+    row-gap: 3px;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+
+    #controls-wrapper {
+        grid-column: 4/7;
+        grid-row: 5/8;
+    }
+
+    #timer-wrapper {
+        grid-column: 7/10;
+        grid-row: 5/8;
+    }
+
+    .card {
+        border: 1px solid #CCC;
+        border-radius: 3px;
+    }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-wrapper {
+    button + button {
+        margin-left: 5px;
+    }
+}
