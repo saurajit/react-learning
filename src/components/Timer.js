@@ -10,12 +10,30 @@ class Timer extends Component {
     };
   }
 
-  componentDidMount() {
+  startTimer() {
+    if (this.timer) {
+      return;
+    }
     this.timer = setInterval(() => {
       this.setState({
         timer: this.state.timer + 1
       })
     }, 1000);
+  }
+
+  stopTimer() {
+    if(this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.isRunning) {
+      this.startTimer();
+    } else {
+      this.stopTimer();
+    }
   }
 
   render() {
